@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#38006b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Anayeli & Julio ∞ + 1</title>
+  <style>
+    :root {
+      --morado-oscuro: #38006b;
+      --morado-principal: #6a1b9a;
+      --lila-suave: #e1bee7;
+      --lila-fondo: #f3e5f5;
+      --verde-detalle: #2e7d32;
+      --verde-claro: #a5d6a7;
+      --blanco: #ffffff;
+      --texto: #2d1b36;
+      --rojo-borrar: #c62828;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--lila-fondo);
+      color: var(--texto);
+      padding-bottom: 85px;
+    }
+
+    #pantalla-bloqueo {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(160deg, var(--morado-oscuro), var(--morado-principal));
+      color: var(--blanco);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    body.desbloqueado #pantalla-bloqueo {
+      display: none;
+    }
+
+    .caja-bloqueo {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 22px;
+      padding: 26px 20px;
+      width: 100%;
+      max-width: 360px;
+      backdrop-filter: blur(6px);
+    }
+
+    .caja-bloqueo h2 {
+      color: var(--blanco);
+      border: none;
+      padding: 0;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .caja-bloqueo .badge-inf {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--verde-claro);
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+    }
+
+    .caja-bloqueo p {
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+      opacity: 0.95;
+    }
+
+    .caja-bloqueo input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1.1rem;
+      text-align: center;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+      color: var(--morado-oscuro);
+      font-weight: bold;
+    }
+
+    .caja-bloqueo button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: var(--verde-detalle);
+      color: var(--blanco);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .error-acceso {
+      color: #ffcdd2;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--morado-oscuro), var(--morado-principal));
+      color: var(--blanco);
+      text-align: center;
+      padding: 28px 16px 24px;
+      border-bottom-left-radius: 26px;
+      border-bottom-right-radius: 26px;
+      box-shadow: 0 4px 12px rgba(56, 0, 107, 0.25);
+    }
+
+    header h1 {
+      font-size: 1.85rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .simbolo {
+      display: inline-block;
+      background-color: rgba(255, 255, 255, 0.18);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: var(--verde-claro);
+      margin-bottom: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s;
+    }
+
+    .simbolo:active {
+      transform: scale(0.95);
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      font-style: italic;
+    }
+
+    #barra-editor {
+      display: none;
+      background: #1b5e20;
+      color: white;
+      padding: 12px 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    body.modo-editor #barra-editor {
+      display: block;
+    }
+
+    .botones-editor {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-editor {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .btn-agregar {
+      background: #ffffff;
+      color: #1b5e20;
+    }
+
+    .btn-salir {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    main {
+      padding: 18px 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .seccion {
+      display: none;
+      animation: aparecer 0.3s ease;
+    }
+
+    .seccion.activa {
+      display: block;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: var(--morado-oscuro);
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+      border-left: 5px solid var(--verde-detalle);
+      padding-left: 10px;
+    }
+
+    .tarjeta {
+      position: relative;
+      background: var(--blanco);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 10px rgba(106, 27, 154, 0.1);
+      border-top: 4px solid var(--morado-principal);
+    }
+
+    .tarjeta .fecha {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--verde-detalle);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .tarjeta h3 {
+      font-size: 1.1rem;
+      color: var(--morado-oscuro);
+      margin-bottom: 8px;
+    }
+
+    .tarjeta p {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    .tarjeta img, .tarjeta video {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+      display: block;
+      max-height: 420px;
+      object-fit: cover;
+    }
+
+    .btn-borrar {
+      display: none;
+      margin-top: 12px;
+      background: var(--rojo-borrar);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    body.modo-editor .btn-borrar {
+      display: inline-block;
+    }
+
+    #modal-agregar {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 200;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .modal-caja {
+      background: white;
+      max-width: 480px;
+      margin: 20px auto;
+      border-radius: 20px;
+      padding: 20px;
+      border-top: 6px solid var(--morado-principal);
+    }
+
+    .modal-caja h3 {
+      color: var(--morado-oscuro);
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .campo {
+      margin-bottom: 12px;
+    }
+
+    .campo label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: var(--morado-oscuro);
+    }
+
+    .campo input, .campo select, .campo textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1.5px solid var(--lila-suave);
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+
+    .campo textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .modal-acciones {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .modal-acciones button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .btn-guardar {
+      background: var(--morado-principal);
+      color: white;
+    }
+
+    .btn-cancelar {
+      background: #eeeeee;
+      color: #444;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--blanco);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 4px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      border-top: 2px solid var(--lila-suave);
+      z-index: 100;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: #7b6888;
+      font-size: 0.78rem;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 10px;
+    }
+
+    nav button.activo {
+      color: var(--morado-principal);
+      background-color: var(--lila-fondo);
+    }
+
+    nav button span.icono {
+      font-size: 1.3rem;
+    }
+
+    .estado-sync {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #6a1b9a;
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+  </style>
+  <script>
+    (function configurarAppInstalable() {
+      const svgIcono = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="110" fill="#38006b"/><circle cx="256" cy="256" r="175" fill="#6a1b9a" stroke="#a5d6a7" stroke-width="14"/><text x="256" y="290" font-family="Arial, sans-serif" font-size="135" font-weight="bold" fill="#a5d6a7" text-anchor="middle">&#8734;+1</text></svg>`;
+      const iconUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgIcono);
+
+      const appleTouch = document.createElement("link");
+      appleTouch.rel = "apple-touch-icon";
+      appleTouch.href = iconUrl;
+      document.head.appendChild(appleTouch);
+
+      const manifestObj = {
+        name: "Anayeli & Julio \u221e + 1",
+        short_name: "Ana & Julio",
+        start_url: "./",
+        scope: "./",
+        display: "standalone",
+        background_color: "#f3e5f5",
+        theme_color: "#38006b",
+        icons: [
+          {
+            src: iconUrl,
+            sizes: "512x512",
+            type: "image/svg+xml",
+            purpose: "any maskable"
+          }
+        ]
+      };
+
+      const manifestLink = document.createElement("link");
+      manifestLink.rel = "manifest";
+      manifestLink.href = "data:application/manifest+json;charset=utf-8," + encodeURIComponent(JSON.stringify(manifestObj));
+      document.head.appendChild(manifestLink);
+    })();
+  </script>
+</head>
+<body>
+
+  <div id="pantalla-bloqueo">
+    <div class="caja-bloqueo">
+      <h2>Anayeli & Julio</h2>
+      <div class="badge-inf">&#8734; + 1</div>
+      <p>Ingresa la contrase&#241;a para abrir nuestro espacio.</p>
+      <input type="password" id="clave-entrada" placeholder="&#8226;&#8226;&#8226;&#8226;" inputmode="numeric">
+      <button onclick="verificarEntrada()">Entrar</button>
+      <div id="error-acceso" class="error-acceso"></div>
+    </div>
+  </div>
+
+  <div id="barra-editor">
+    <div>&#128275; <strong>Modo Editor Activo (Julio)</strong></div>
+    <div class="botones-editor">
+      <button class="btn-editor btn-agregar" onclick="abrirModal()">+ Agregar recuerdo</button>
+      <button class="btn-editor btn-salir" onclick="salirEditor()">Cerrar modo editor</button>
+    </div>
+  </div>
+
+  <header>
+    <h1>Anayeli & Julio</h1>
+    <div class="simbolo" onclick="pedirClave()">&#8734; + 1 &bull; Desde el 3 de julio de 2017</div>
+    <p>"Su sonrisa me enamora"</p>
+  </header>
+
+  <main>
+    <div id="estado-sync" class="estado-sync">Sincronizando recuerdos...</div>
+
+    <section id="historia" class="seccion activa">
+      <h2>Nuestra Historia</h2>
+      <div id="lista-historia"></div>
+    </section>
+
+    <section id="galeria" class="seccion">
+      <h2>Fotos, Videos y Juguetes</h2>
+      <div id="lista-galeria"></div>
+    </section>
+
+    <section id="poemas" class="seccion">
+      <h2>Cartas y Poemas</h2>
+      <div id="lista-poemas"></div>
+    </section>
+
+    <section id="dibujos" class="seccion">
+      <h2>Mis Dibujos para Ti</h2>
+      <div id="lista-dibujos"></div>
+    </section>
+  </main>
+
+  <div id="modal-agregar">
+    <div class="modal-caja">
+      <h3>Agregar nuevo recuerdo</h3>
+      
+      <div class="campo">
+        <label>&#191;En qu&#233; secci&#243;n va?</label>
+        <select id="input-seccion">
+          <option value="historia">&#128156; Nuestra Historia</option>
+          <option value="galeria">&#128248; Fotos, Videos y Juguetes</option>
+          <option value="poemas">&#9997;&#65039; Cartas y Poemas</option>
+          <option value="dibujos">&#127912; Mis Dibujos</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Fecha o etiqueta (ej. 3 de julio de 2017)</label>
+        <input type="text" id="input-fecha" placeholder="Escribe la fecha o momento...">
+      </div>
+
+      <div class="campo">
+        <label>T&#237;tulo</label>
+        <input type="text" id="input-titulo" placeholder="T&#237;tulo del recuerdo o poema...">
+      </div>
+
+      <div class="campo">
+        <label>Texto, carta o poema (o enlace de video)</label>
+        <textarea id="input-texto" placeholder="Escribe aqu&#237; tu poema, carta o recuerdo..."></textarea>
+      </div>
+
+      <div class="campo">
+        <label>Foto ligera desde tu tel&#233;fono (opcional)</label>
+        <input type="file" id="input-archivo" accept="image/*">
+      </div>
+
+      <div class="modal-acciones">
+        <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        <button class="btn-guardar" id="btn-guardar-recuerdo" onclick="guardarRecuerdo()">Guardar en nube</button>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <button class="activo" onclick="cambiarSeccion('historia', this)">
+      <span class="icono">&#128156;</span>
+      Historia
+    </button>
+    <button onclick="cambiarSeccion('galeria', this)">
+      <span class="icono">&#128248;</span>
+      Fotos/Videos
+    </button>
+    <button onclick="cambiarSeccion('poemas', this)">
+      <span class="icono">&#9997;&#65039;</span>
+      Poemas
+    </button>
+    <button onclick="cambiarSeccion('dibujos', this)">
+      <span class="icono">&#127912;</span>
+      Dibujos
+    </button>
+  </nav>
+
+  <script>
+    const CLAVE_ENTRADA = "8489";
+    const CLAVE_SECRETA = "3605";
+    const DB_URL = "https://julio-ana-default-rtdb.firebaseio.com/recuerdos.json";
+
+    const recuerdosIniciales = {
+      init1: {
+        seccion: "historia",
+        fecha: "3 de julio de 2017",
+        titulo: "Donde todo empez\u00f3",
+        texto: "El inicio de nuestra historia juntos, sumando momentos, detalles y recuerdos que solo son nuestros."
+      },
+      init2: {
+        seccion: "historia",
+        fecha: "Agosto 2026",
+        titulo: "D\u00eda de la Novia y Bellota",
+        texto: "Celebrando juntos con detalles hechos con cari\u00f1o y nuestra esencia de Butch y Bellota."
+      },
+      init3: {
+        seccion: "galeria",
+        fecha: "Nuestros momentos",
+        titulo: "Fotos, videos y juguetes",
+        texto: "Aqu\u00ed iremos guardando nuestras salidas como las trajineras, videos juntos y las fotos de Bellota y nuestros mu\u00f1ecos."
+      },
+      init4: {
+        seccion: "poemas",
+        fecha: "Para Ana Jelly",
+        titulo: "Versos para ti",
+        texto: "Cada palabra escrita con el coraz\u00f3n para acortar la distancia y recordarte que tu sonrisa me enamora."
+      },
+      init5: {
+        seccion: "dibujos",
+        fecha: "Hecho a mano",
+        titulo: "Tarjetas y trazos",
+        texto: "Dibujos hechos l\u00ednea por l\u00ednea y coloreados con dedicaci\u00f3n especial para ti."
+      }
+    };
+
+    function verificarEntrada() {
+      const input = document.getElementById("clave-entrada");
+      const error = document.getElementById("error-acceso");
+      const valor = input.value.trim();
+
+      if (valor === CLAVE_ENTRADA || valor === CLAVE_SECRETA) {
+        document.body.classList.add("desbloqueado");
+        error.textContent = "";
+        input.value = "";
+      } else {
+        error.textContent = "Contrase\u00f1a incorrecta. Intenta de nuevo.";
+      }
+    }
+
+    document.getElementById("clave-entrada").addEventListener("keyup", function(e) {
+      if (e.key === "Enter") verificarEntrada();
+    });
+
+    function escucharNube() {
+      fetch(DB_URL)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("estado-sync").textContent = "\u2601\ufe0f Conectado y sincronizado";
+          if (!data) {
+            fetch(DB_URL, {
+              method: "PUT",
+              body: JSON.stringify(recuerdosIniciales)
+            }).then(() => escucharNube());
+            return;
+          }
+          renderizarRecuerdos(data);
+        })
+        .catch(() => {
+          document.getElementById("estado-sync").textContent = "\u26a0\ufe0f Revisa tu conexi\u00f3n a internet";
+        });
+    }
+
+    function renderizarRecuerdos(data) {
+      ["historia", "galeria", "poemas", "dibujos"].forEach(sec => {
+        document.getElementById("lista-" + sec).innerHTML = "";
+      });
+
+      const entries = Object.entries(data);
+      entries.forEach(([id, item]) => {
+        if (!item || !item.seccion) return;
+        const contenedor = document.getElementById("lista-" + item.seccion);
+        if (!contenedor) return;
+
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "tarjeta";
+
+        let mediaHTML = "";
+        if (item.imagenBase64) {
+          mediaHTML = `<img src="${item.imagenBase64}" alt="Recuerdo">`;
+        }
+
+        tarjeta.innerHTML = `
+          <div class="fecha">${escaparTexto(item.fecha || "")}</div>
+          <h3>${escaparTexto(item.titulo || "")}</h3>
+          <p>${escaparTexto(item.texto || "")}</p>
+          ${mediaHTML}
+          <button class="btn-borrar" onclick="borrarRecuerdo('${id}')">&#128465;&#65039; Borrar este recuerdo</button>
+        `;
+
+        contenedor.prepend(tarjeta);
+      });
+    }
+
+    function escaparTexto(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function pedirClave() {
+      if (document.body.classList.contains("modo-editor")) return;
+      const intento = prompt("Ingresa la contrase\u00f1a de editor:");
+      if (intento === CLAVE_SECRETA) {
+        document.body.classList.add("modo-editor");
+        alert("\u00a1Bienvenido Julio! Ya puedes agregar o borrar recuerdos en la nube.");
+      } else if (intento !== null) {
+        alert("Contrase\u00f1a incorrecta.");
+      }
+    }
+
+    function salirEditor() {
+      document.body.classList.remove("modo-editor");
+    }
+
+    function abrirModal() {
+      document.getElementById("modal-agregar").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal-agregar").style.display = "none";
+      document.getElementById("input-fecha").value = "";
+      document.getElementById("input-titulo").value = "";
+      document.getElementById("input-texto").value = "";
+      document.getElementById("input-archivo").value = "";
+    }
+
+    function guardarRecuerdo() {
+      const seccion = document.getElementById("input-seccion").value;
+      const fecha = document.getElementById("input-fecha").value.trim();
+      const titulo = document.getElementById("input-titulo").value.trim();
+      const texto = document.getElementById("input-texto").value.trim();
+      const archivo = document.getElementById("input-archivo").files[0];
+
+      if (!titulo && !texto && !archivo) {
+        alert("Escribe un t\u00edtulo, un texto o elige una foto.");
+        return;
+      }
+
+      const btnGuardar = document.getElementById("btn-guardar-recuerdo");
+      btnGuardar.disabled = true;
+      btnGuardar.textContent = "Subiendo...";
+
+      const enviarANube = (imagenBase64) => {
+        const nuevo = {
+          seccion,
+          fecha,
+          titulo,
+          texto,
+          imagenBase64: imagenBase64 || null
+        };
+
+        fetch(DB_URL, {
+          method: "POST",
+          body: JSON.stringify(nuevo)
+        })
+        .then(() => {
+          btnGuardar.disabled = false;
+          btnGuardar.textContent = "Guardar en nube";
+          cerrarModal();
+          escucharNube();
+        })
+        .catch(() => {
+          btnGuardar.disabled = false;
+          btnGuardar.textContent = "Guardar en nube";
+          alert("Hubo un problema al subir. Intenta de nuevo.");
+        });
+      };
+
+      if (archivo) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          enviarANube(e.target.result);
+        };
+        reader.readAsDataURL(archivo);
+      } else {
+        enviarANube(null);
+      }
+    }
+
+    function borrarRecuerdo(id) {
+      if (!confirm("\u00bfSeguro que quieres borrar este recuerdo de la nube?")) return;
+      const urlItem = `https://julio-ana-default-rtdb.firebaseio.com/recuerdos/${id}.json`;
+      fetch(urlItem, { method: "DELETE" })
+        .then(() => escucharNube());
+    }
+
+    function cambiarSeccion(idSeccion, botonPresionado) {
+      document.querySelectorAll('.seccion').forEach(sec => sec.classList.remove('activa'));
+      document.getElementById(idSeccion).classList.add('activa');
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('activo'));
+      botonPresionado.classList.add('activo');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    escucharNube();
+    setInterval(escucharNube, 10000);
+  </script>
+
+</body>
+</html>
