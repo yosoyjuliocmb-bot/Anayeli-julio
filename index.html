@@ -35,7 +35,7 @@
       background: linear-gradient(180deg, #f3e5f5 0%, #ede7f6 55%, #e8f5e9 100%);
       min-height: 100vh;
       color: var(--texto);
-      padding-bottom: 92px;
+      padding-bottom: 96px;
     }
 
     #pantalla-bloqueo {
@@ -168,6 +168,7 @@
       opacity: 0.98;
       font-style: italic;
       margin-bottom: 12px;
+      cursor: pointer;
     }
 
     .contador-tiempo {
@@ -407,6 +408,107 @@
       display: inline-block;
     }
 
+    /* Estilos de la seccion de Juegos (Preguntas y Retos) */
+    .tarjeta-juego {
+      background: linear-gradient(145deg, #ffffff, #fdf7ff);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(106, 27, 154, 0.12);
+      border: 1px solid #e1bee7;
+      border-top: 5px solid var(--morado-principal);
+    }
+
+    .tarjeta-juego.reto {
+      background: linear-gradient(145deg, #ffffff, #f3fbf4);
+      border-color: #c8e6c9;
+      border-top-color: var(--verde-vivo);
+    }
+
+    .etiqueta-juego {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: #f3e5f5;
+      color: var(--morado-principal);
+    }
+
+    .tarjeta-juego.reto .etiqueta-juego {
+      background: #e8f5e9;
+      color: var(--verde-detalle);
+    }
+
+    .texto-dinamica {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--texto);
+      line-height: 1.55;
+      margin-bottom: 12px;
+      min-height: 54px;
+    }
+
+    .pista-romantica {
+      font-size: 0.84rem;
+      color: #6a4c7a;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    .acciones-juego {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-juego {
+      flex: 1;
+      min-width: 130px;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: transform 0.12s;
+    }
+
+    .btn-juego:active {
+      transform: scale(0.96);
+    }
+
+    .btn-juego-primario {
+      background: var(--morado-principal);
+      color: #ffffff;
+    }
+
+    .tarjeta-juego.reto .btn-juego-primario {
+      background: var(--verde-detalle);
+    }
+
+    .btn-juego-secundario {
+      background: #f3e5f5;
+      color: var(--morado-oscuro);
+      border: 1px solid #d1c4e9;
+    }
+
+    .marcador-pareja {
+      background: var(--blanco);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--lila-suave);
+      font-size: 0.86rem;
+      color: var(--morado-oscuro);
+      font-weight: 600;
+    }
+
     #modal-agregar {
       display: none;
       position: fixed;
@@ -497,7 +599,7 @@
       background: var(--blanco);
       display: flex;
       justify-content: space-around;
-      padding: 10px 4px;
+      padding: 9px 2px;
       box-shadow: 0 -3px 12px rgba(56, 0, 107, 0.12);
       border-top: 2px solid var(--lila-suave);
       z-index: 100;
@@ -507,14 +609,14 @@
       background: none;
       border: none;
       color: #7b6888;
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       font-weight: bold;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       cursor: pointer;
-      padding: 5px 8px;
+      padding: 5px 5px;
       border-radius: 12px;
       transition: all 0.2s;
     }
@@ -526,7 +628,7 @@
     }
 
     nav button span.icono {
-      font-size: 1.28rem;
+      font-size: 1.22rem;
     }
 
     .estado-sync {
@@ -541,17 +643,17 @@
       position: fixed;
       top: 18px;
       left: 50%;
-      transform: translateX(-50%) translateY(-80px);
+      transform: translateX(-50%) translateY(-85px);
       background: var(--morado-oscuro);
       color: #fff;
-      padding: 10px 18px;
+      padding: 11px 20px;
       border-radius: 999px;
-      font-size: 0.86rem;
+      font-size: 0.9rem;
       font-weight: bold;
       z-index: 1200;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
       transition: transform 0.28s ease;
-      max-width: 90%;
+      max-width: 92%;
       text-align: center;
     }
 
@@ -678,6 +780,38 @@
       </div>
       <div id="lista-dibujos"></div>
     </section>
+
+    <section id="jugar" class="seccion">
+      <div class="encabezado-seccion">
+        <h2>Preguntas y Retos</h2>
+        <span class="contador-items">Para los dos &#128156;</span>
+      </div>
+
+      <div class="tarjeta-juego">
+        <span class="etiqueta-juego">&#128172; Pregunta rom&#225;ntica</span>
+        <p id="texto-pregunta" class="texto-dinamica">Cargando pregunta...</p>
+        <p id="pista-pregunta" class="pista-romantica">Resp&#243;ndansela con calma y mucha ternura.</p>
+        <div class="acciones-juego">
+          <button class="btn-juego btn-juego-primario" onclick="siguientePregunta()">&#10024; Otra pregunta</button>
+          <button class="btn-juego btn-juego-secundario" onclick="celebrarPregunta()">&#128156; &#161;Me encant&#243;!</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-juego reto">
+        <span class="etiqueta-juego">&#127775; Reto tierno de pareja</span>
+        <p id="texto-reto" class="texto-dinamica">Cargando reto...</p>
+        <p class="pista-romantica">Un peque&#241;o detalle hace enorme la distancia.</p>
+        <div class="acciones-juego">
+          <button class="btn-juego btn-juego-primario" onclick="siguienteReto()">&#127922; Nuevo reto</button>
+          <button class="btn-juego btn-juego-secundario" onclick="completarReto()">&#9989; Reto cumplido</button>
+        </div>
+      </div>
+
+      <div class="marcador-pareja">
+        <span>&#128154; Momentos jugados juntos:</span>
+        <span id="puntos-pareja">0 puntos</span>
+      </div>
+    </section>
   </main>
 
   <div id="modal-agregar">
@@ -745,6 +879,10 @@
       <span class="icono">&#127912;</span>
       Dibujos
     </button>
+    <button onclick="cambiarSeccion('jugar', this)">
+      <span class="icono">&#127922;</span>
+      Jugar
+    </button>
   </nav>
 
   <script>
@@ -758,7 +896,51 @@
       "\"Acortando la distancia un latido a la vez\"",
       "\"Nuestro \u221e + 1 sigue escribi\u00e9ndose\""
     ];
+
+    const preguntasPareja = [
+      {
+        pregunta: "\u00bfQu\u00e9 fue lo primero que te hizo sentir paz o ternura cuando empezamos a conectar m\u00e1s?",
+        pista: "Un recuerdo del inicio siempre saca una sonrisa."
+      },
+      {
+        pregunta: "Si hoy pudi\u00e9ramos escaparnos a un pueblito o a un lugar tranquilo solo los dos, \u00bfa d\u00f3nde ir\u00edamos?",
+        pista: "Imaginen el plan perfecto de fin de semana."
+      },
+      {
+        pregunta: "\u00bfCu\u00e1l es ese gesto o detalle peque\u00f1o del otro que te enamora incluso en los d\u00edas cansados?",
+        pista: "A veces lo m\u00e1s sencillo es lo que m\u00e1s toca el coraz\u00f3n."
+      },
+      {
+        pregunta: "\u00bfQu\u00e9 canci\u00f3n sientes que describe lo que hemos vivido o lo que sientes por m\u00ed ahorita?",
+        pista: "Pueden dedic\u00e1rsela despu\u00e9s de responder."
+      },
+      {
+        pregunta: "Si nos imaginamos como Bellota y Butch en una nueva aventura juntos, \u00bfcu\u00e1l ser\u00eda nuestra misi\u00f3n hoy?",
+        pista: "Con estilo, complicidad y mucho cari\u00f1o."
+      },
+      {
+        pregunta: "\u00bfQu\u00e9 sue\u00f1o o momento bonito te ilusiona mucho que vivamos pr\u00f3ximamente?",
+        pista: "Cuenten lo que m\u00e1s esperan del futuro."
+      },
+      {
+        pregunta: "\u00bfQu\u00e9 palabra o frase te gustar\u00eda escuchar de m\u00ed cada vez que sientas que el d\u00eda pesa?",
+        pista: "Gu\u00e1rdense esa frase como un abrazo en palabras."
+      }
+    ];
+
+    const retosPareja = [
+      "M\u00e1ndale un mensaje o nota de voz dici\u00e9ndole tres cosas bonitas que admiras de ella/de \u00e9l hoy mismo.",
+      "Escr\u00edbele un verso o una frase corta y tierna para ponerla despu\u00e9s en la secci\u00f3n de Poemas.",
+      "Elijan una foto o recuerdo favorito de los que tienen y cu\u00e9ntense por qu\u00e9 les gusta tanto.",
+      "M\u00e1ndense un emoji o detalle sorpresa en un momento inesperado del d\u00eda para sacarse una sonrisa.",
+      "Piensen en un antojo o detalle dulce para compartir o regalarse cuando se vean.",
+      "Hagan un trato de 5 minutos sin prisas para platicar solo de cosas bonitas y de sus planes juntos."
+    ];
+
     let indiceFrase = 0;
+    let indicePregunta = 0;
+    let indiceReto = 0;
+    let puntosPareja = Number(localStorage.getItem("puntos_ana_julio") || 0);
     let ultimoHashDatos = "";
 
     const recuerdosIniciales = {
@@ -806,7 +988,7 @@
       clearTimeout(mostrarToast._timer);
       mostrarToast._timer = setTimeout(() => {
         toast.classList.remove("visible");
-      }, 2600);
+      }, 2800);
     }
 
     function cambiarFrase() {
@@ -816,7 +998,7 @@
     }
 
     function actualizarContadorTiempo() {
-      const inicio = new Date(2017, 6, 3); // 3 de julio de 2017
+      const inicio = new Date(2017, 6, 3);
       const ahora = new Date();
       let anios = ahora.getFullYear() - inicio.getFullYear();
       let meses = ahora.getMonth() - inicio.getMonth();
@@ -839,7 +1021,7 @@
 
     function lanzarCorazones() {
       const emojis = ["\ud83d\udc9c", "\ud83d\udc9a", "\u2728", "\ud83d\udc96"];
-      for (let i = 0; i < 18; i++) {
+      for (let i = 0; i < 20; i++) {
         const span = document.createElement("span");
         span.className = "lluvia-corazon";
         span.textContent = emojis[i % emojis.length];
@@ -849,7 +1031,46 @@
         document.body.appendChild(span);
         setTimeout(() => span.remove(), 3500);
       }
-      mostrarToast("\u00a1Para Ana Jelly con todo el cari\u00f1o! \ud83d\udc9c");
+      mostrarToast("Te amo siempre, Ana");
+    }
+
+    function renderizarDinamicas() {
+      const actualPreg = preguntasPareja[indicePregunta % preguntasPareja.length];
+      document.getElementById("texto-pregunta").textContent = actualPreg.pregunta;
+      document.getElementById("pista-pregunta").textContent = actualPreg.pista;
+      document.getElementById("texto-reto").textContent = retosPareja[indiceReto % retosPareja.length];
+      document.getElementById("puntos-pareja").textContent =
+        puntosPareja + (puntosPareja === 1 ? " punto" : " puntos");
+    }
+
+    function sumarPuntos(cantidad, mensaje) {
+      puntosPareja += cantidad;
+      localStorage.setItem("puntos_ana_julio", String(puntosPareja));
+      renderizarDinamicas();
+      mostrarToast(mensaje);
+    }
+
+    function siguientePregunta() {
+      indicePregunta = (indicePregunta + 1) % preguntasPareja.length;
+      renderizarDinamicas();
+      mostrarToast("\u00a1Nueva pregunta para los dos! \ud83d\udc9c");
+    }
+
+    function celebrarPregunta() {
+      lanzarCorazones();
+      sumarPuntos(1, "Te amo siempre, Ana");
+    }
+
+    function siguienteReto() {
+      indiceReto = (indiceReto + 1) % retosPareja.length;
+      renderizarDinamicas();
+      mostrarToast("\u00a1Nuevo reto tierno listo! \ud83c\udf1f");
+    }
+
+    function completarReto() {
+      sumarPuntos(2, "\u00a1Reto cumplido! +2 puntos \ud83d\udc9a");
+      indiceReto = (indiceReto + 1) % retosPareja.length;
+      renderizarDinamicas();
     }
 
     function verificarEntrada() {
@@ -1007,7 +1228,8 @@
     function recuerdoSorpresa() {
       const tarjetas = Array.from(document.querySelectorAll(".seccion.activa .tarjeta"));
       if (!tarjetas.length) {
-        mostrarToast("A\u00fan no hay recuerdos en esta secci\u00f3n");
+        siguientePregunta();
+        mostrarToast("\u00a1Te dej\u00e9 una pregunta sorpresa para jugar!");
         return;
       }
       document.querySelectorAll(".tarjeta").forEach(t => t.classList.remove("destacada"));
@@ -1176,6 +1398,7 @@
     }
 
     actualizarContadorTiempo();
+    renderizarDinamicas();
     escucharNube(true);
     setInterval(() => escucharNube(false), 12000);
   </script>
