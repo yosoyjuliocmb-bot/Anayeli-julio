@@ -7,14 +7,16 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
-  <title>Anayeli & Julio ∞ + 1</title>
+  <title>Anayeli &amp; Julio ∞ + 1</title>
   <style>
     :root {
       --morado-oscuro: #38006b;
       --morado-principal: #6a1b9a;
+      --morado-vivo: #8e24aa;
       --lila-suave: #e1bee7;
       --lila-fondo: #f3e5f5;
       --verde-detalle: #2e7d32;
+      --verde-vivo: #43a047;
       --verde-claro: #a5d6a7;
       --blanco: #ffffff;
       --texto: #2d1b36;
@@ -30,9 +32,10 @@
     }
 
     body {
-      background-color: var(--lila-fondo);
+      background: linear-gradient(180deg, #f3e5f5 0%, #ede7f6 55%, #e8f5e9 100%);
+      min-height: 100vh;
       color: var(--texto);
-      padding-bottom: 85px;
+      padding-bottom: 92px;
     }
 
     #pantalla-bloqueo {
@@ -54,36 +57,38 @@
     }
 
     .caja-bloqueo {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 22px;
-      padding: 26px 20px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 24px;
+      padding: 28px 22px;
       width: 100%;
       max-width: 360px;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
     }
 
     .caja-bloqueo h2 {
       color: var(--blanco);
       border: none;
       padding: 0;
-      font-size: 1.5rem;
+      font-size: 1.55rem;
       margin-bottom: 6px;
     }
 
     .caja-bloqueo .badge-inf {
       display: inline-block;
-      background: rgba(255, 255, 255, 0.16);
+      background: rgba(165, 214, 167, 0.2);
+      border: 1px solid rgba(165, 214, 167, 0.45);
       color: var(--verde-claro);
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 16px;
       font-weight: bold;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       margin-bottom: 14px;
     }
 
     .caja-bloqueo p {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       margin-bottom: 16px;
       opacity: 0.95;
     }
@@ -93,9 +98,9 @@
       padding: 12px;
       border-radius: 12px;
       border: none;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       text-align: center;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       margin-bottom: 12px;
       color: var(--morado-oscuro);
       font-weight: bold;
@@ -103,14 +108,15 @@
 
     .caja-bloqueo button {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border: none;
       border-radius: 12px;
-      background: var(--verde-detalle);
+      background: linear-gradient(90deg, var(--verde-detalle), var(--verde-vivo));
       color: var(--blanco);
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .error-acceso {
@@ -121,13 +127,15 @@
     }
 
     header {
-      background: linear-gradient(135deg, var(--morado-oscuro), var(--morado-principal));
+      background: linear-gradient(135deg, var(--morado-oscuro), var(--morado-principal), var(--morado-vivo));
       color: var(--blanco);
       text-align: center;
-      padding: 28px 16px 24px;
-      border-bottom-left-radius: 26px;
-      border-bottom-right-radius: 26px;
-      box-shadow: 0 4px 12px rgba(56, 0, 107, 0.25);
+      padding: 26px 16px 24px;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: 0 6px 18px rgba(56, 0, 107, 0.28);
+      position: relative;
+      overflow: hidden;
     }
 
     header h1 {
@@ -139,30 +147,69 @@
     .simbolo {
       display: inline-block;
       background-color: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(165, 214, 167, 0.35);
       padding: 6px 16px;
       border-radius: 20px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: bold;
       color: var(--verde-claro);
       margin-bottom: 10px;
       cursor: pointer;
       user-select: none;
-      transition: transform 0.15s;
+      transition: transform 0.15s, background 0.2s;
     }
 
     .simbolo:active {
       transform: scale(0.95);
     }
 
-    header p {
-      font-size: 0.95rem;
-      opacity: 0.95;
+    .frase-header {
+      font-size: 0.98rem;
+      opacity: 0.98;
       font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .contador-tiempo {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 16px;
+      padding: 8px 14px;
+      font-size: 0.84rem;
+      color: #f1f8e9;
+      display: inline-block;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .acciones-header {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn-pill {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+
+    .btn-pill:active {
+      transform: scale(0.95);
+      background: rgba(255, 255, 255, 0.28);
     }
 
     #barra-editor {
       display: none;
-      background: #1b5e20;
+      background: linear-gradient(90deg, #1b5e20, #2e7d32);
       color: white;
       padding: 12px 16px;
       text-align: center;
@@ -220,52 +267,127 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .encabezado-seccion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
     h2 {
       color: var(--morado-oscuro);
-      font-size: 1.35rem;
-      margin-bottom: 14px;
+      font-size: 1.32rem;
       border-left: 5px solid var(--verde-detalle);
       padding-left: 10px;
+      margin: 0;
+    }
+
+    .contador-items {
+      background: var(--blanco);
+      color: var(--morado-principal);
+      font-size: 0.78rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--lila-suave);
     }
 
     .tarjeta {
       position: relative;
       background: var(--blanco);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 16px;
       margin-bottom: 16px;
-      box-shadow: 0 3px 10px rgba(106, 27, 154, 0.1);
+      box-shadow: 0 5px 15px rgba(106, 27, 154, 0.1);
       border-top: 4px solid var(--morado-principal);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tarjeta.destacada {
+      border-top-color: var(--verde-vivo);
+      box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.35), 0 8px 20px rgba(56, 0, 107, 0.18);
     }
 
     .tarjeta .fecha {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: bold;
       color: var(--verde-detalle);
       text-transform: uppercase;
       margin-bottom: 4px;
+      letter-spacing: 0.4px;
     }
 
     .tarjeta h3 {
-      font-size: 1.1rem;
+      font-size: 1.12rem;
       color: var(--morado-oscuro);
       margin-bottom: 8px;
     }
 
     .tarjeta p {
       font-size: 0.95rem;
-      line-height: 1.55;
+      line-height: 1.58;
       white-space: pre-line;
       word-break: break-word;
     }
 
     .tarjeta img, .tarjeta video {
       width: 100%;
-      border-radius: 12px;
-      margin-top: 10px;
+      border-radius: 14px;
+      margin-top: 12px;
       display: block;
-      max-height: 420px;
+      max-height: 440px;
       object-fit: cover;
+      background: #12071c;
+    }
+
+    .video-embed {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      margin-top: 12px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #12071c;
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .barra-reacciones {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed #e1bee7;
+      flex-wrap: wrap;
+    }
+
+    .btn-reaccion {
+      background: #f8f0fc;
+      border: 1px solid #e1bee7;
+      color: var(--morado-oscuro);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: transform 0.12s, background 0.2s;
+    }
+
+    .btn-reaccion:active {
+      transform: scale(0.92);
+      background: #e1bee7;
     }
 
     .btn-borrar {
@@ -274,8 +396,8 @@
       background: var(--rojo-borrar);
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 8px;
+      padding: 7px 13px;
+      border-radius: 9px;
       font-size: 0.82rem;
       font-weight: bold;
       cursor: pointer;
@@ -289,7 +411,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.68);
       z-index: 200;
       padding: 16px;
       overflow-y: auto;
@@ -299,7 +421,7 @@
       background: white;
       max-width: 480px;
       margin: 20px auto;
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 20px;
       border-top: 6px solid var(--morado-principal);
     }
@@ -322,6 +444,12 @@
       color: var(--morado-oscuro);
     }
 
+    .campo .ayuda-campo {
+      font-size: 0.76rem;
+      color: #6a4c7a;
+      margin-top: 3px;
+    }
+
     .campo input, .campo select, .campo textarea {
       width: 100%;
       padding: 10px;
@@ -331,7 +459,7 @@
     }
 
     .campo textarea {
-      min-height: 100px;
+      min-height: 95px;
       resize: vertical;
     }
 
@@ -370,7 +498,7 @@
       display: flex;
       justify-content: space-around;
       padding: 10px 4px;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 -3px 12px rgba(56, 0, 107, 0.12);
       border-top: 2px solid var(--lila-suave);
       z-index: 100;
     }
@@ -379,32 +507,72 @@
       background: none;
       border: none;
       color: #7b6888;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: bold;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 10px;
+      padding: 5px 8px;
+      border-radius: 12px;
+      transition: all 0.2s;
     }
 
     nav button.activo {
       color: var(--morado-principal);
       background-color: var(--lila-fondo);
+      transform: translateY(-2px);
     }
 
     nav button span.icono {
-      font-size: 1.3rem;
+      font-size: 1.28rem;
     }
 
     .estado-sync {
       text-align: center;
       font-size: 0.78rem;
-      color: #6a1b9a;
-      margin-bottom: 10px;
-      opacity: 0.8;
+      color: var(--morado-principal);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .toast {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: var(--morado-oscuro);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: bold;
+      z-index: 1200;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      transition: transform 0.28s ease;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .lluvia-corazon {
+      position: fixed;
+      top: -30px;
+      font-size: 1.4rem;
+      pointer-events: none;
+      z-index: 950;
+      animation: caerCorazon linear forwards;
+    }
+
+    @keyframes caerCorazon {
+      to {
+        transform: translateY(108vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
   <script>
@@ -444,9 +612,11 @@
 </head>
 <body>
 
+  <div id="toast" class="toast"></div>
+
   <div id="pantalla-bloqueo">
     <div class="caja-bloqueo">
-      <h2>Anayeli & Julio</h2>
+      <h2>Anayeli &amp; Julio</h2>
       <div class="badge-inf">&#8734; + 1</div>
       <p>Ingresa la contrase&#241;a para abrir nuestro espacio.</p>
       <input type="password" id="clave-entrada" placeholder="&#8226;&#8226;&#8226;&#8226;" inputmode="numeric">
@@ -458,37 +628,54 @@
   <div id="barra-editor">
     <div>&#128275; <strong>Modo Editor Activo (Julio)</strong></div>
     <div class="botones-editor">
-      <button class="btn-editor btn-agregar" onclick="abrirModal()">+ Agregar recuerdo</button>
+      <button class="btn-editor btn-agregar" onclick="abrirModal()">+ Agregar recuerdo o video</button>
       <button class="btn-editor btn-salir" onclick="salirEditor()">Cerrar modo editor</button>
     </div>
   </div>
 
   <header>
-    <h1>Anayeli & Julio</h1>
+    <h1>Anayeli &amp; Julio</h1>
     <div class="simbolo" onclick="pedirClave()">&#8734; + 1 &bull; Desde el 3 de julio de 2017</div>
-    <p>"Su sonrisa me enamora"</p>
+    <p id="frase-rotativa" class="frase-header" onclick="cambiarFrase()">"Su sonrisa me enamora"</p>
+    <div id="contador-historia" class="contador-tiempo" onclick="lanzarCorazones()">Calculando nuestro tiempo juntos...</div>
+    <div class="acciones-header">
+      <button class="btn-pill" onclick="recuerdoSorpresa()">&#10024; Recuerdo sorpresa</button>
+      <button class="btn-pill" onclick="lanzarCorazones()">&#128156; Lluvia de corazones</button>
+    </div>
   </header>
 
   <main>
     <div id="estado-sync" class="estado-sync">Sincronizando recuerdos...</div>
 
     <section id="historia" class="seccion activa">
-      <h2>Nuestra Historia</h2>
+      <div class="encabezado-seccion">
+        <h2>Nuestra Historia</h2>
+        <span class="contador-items" id="count-historia">0</span>
+      </div>
       <div id="lista-historia"></div>
     </section>
 
     <section id="galeria" class="seccion">
-      <h2>Fotos, Videos y Juguetes</h2>
+      <div class="encabezado-seccion">
+        <h2>Fotos, Videos y Juguetes</h2>
+        <span class="contador-items" id="count-galeria">0</span>
+      </div>
       <div id="lista-galeria"></div>
     </section>
 
     <section id="poemas" class="seccion">
-      <h2>Cartas y Poemas</h2>
+      <div class="encabezado-seccion">
+        <h2>Cartas y Poemas</h2>
+        <span class="contador-items" id="count-poemas">0</span>
+      </div>
       <div id="lista-poemas"></div>
     </section>
 
     <section id="dibujos" class="seccion">
-      <h2>Mis Dibujos para Ti</h2>
+      <div class="encabezado-seccion">
+        <h2>Mis Dibujos para Ti</h2>
+        <span class="contador-items" id="count-dibujos">0</span>
+      </div>
       <div id="lista-dibujos"></div>
     </section>
   </main>
@@ -496,7 +683,7 @@
   <div id="modal-agregar">
     <div class="modal-caja">
       <h3>Agregar nuevo recuerdo</h3>
-      
+
       <div class="campo">
         <label>&#191;En qu&#233; secci&#243;n va?</label>
         <select id="input-seccion">
@@ -514,17 +701,24 @@
 
       <div class="campo">
         <label>T&#237;tulo</label>
-        <input type="text" id="input-titulo" placeholder="T&#237;tulo del recuerdo o poema...">
+        <input type="text" id="input-titulo" placeholder="T&#237;tulo del recuerdo, video o poema...">
       </div>
 
       <div class="campo">
-        <label>Texto, carta o poema (o enlace de video)</label>
-        <textarea id="input-texto" placeholder="Escribe aqu&#237; tu poema, carta o recuerdo..."></textarea>
+        <label>Texto, carta, poema o enlace de YouTube / video</label>
+        <textarea id="input-texto" placeholder="Escribe aqu&#237; tu dedicatoria, poema o pega un link de YouTube / .mp4..."></textarea>
+        <div class="ayuda-campo">Si pegas un enlace de YouTube o de video (.mp4), aparecer&#225; el reproductor autom&#225;ticamente.</div>
       </div>
 
       <div class="campo">
-        <label>Foto ligera desde tu tel&#233;fono (opcional)</label>
-        <input type="file" id="input-archivo" accept="image/*">
+        <label>Enlace directo de video (opcional)</label>
+        <input type="url" id="input-video-url" placeholder="https://youtu.be/... o https://.../video.mp4">
+      </div>
+
+      <div class="campo">
+        <label>Foto o video corto desde tu tel&#233;fono (opcional)</label>
+        <input type="file" id="input-archivo" accept="image/*,video/*">
+        <div class="ayuda-campo">Las fotos se comprimen solas para subir r&#225;pido. Para videos pesados es mejor pegarlos desde YouTube.</div>
       </div>
 
       <div class="modal-acciones">
@@ -555,41 +749,108 @@
 
   <script>
     const CLAVE_ENTRADA = "8489";
-    const CLAVE_SECRETA = "3605";
+    const CLAVE_SECRETA = "1305";
     const DB_URL = "https://julio-ana-default-rtdb.firebaseio.com/recuerdos.json";
+
+    const frasesAmor = [
+      "\"Su sonrisa me enamora\"",
+      "\"Bellota & Butch en cada detalle\"",
+      "\"Acortando la distancia un latido a la vez\"",
+      "\"Nuestro \u221e + 1 sigue escribi\u00e9ndose\""
+    ];
+    let indiceFrase = 0;
+    let ultimoHashDatos = "";
 
     const recuerdosIniciales = {
       init1: {
         seccion: "historia",
         fecha: "3 de julio de 2017",
         titulo: "Donde todo empez\u00f3",
-        texto: "El inicio de nuestra historia juntos, sumando momentos, detalles y recuerdos que solo son nuestros."
+        texto: "El inicio de nuestra historia juntos, sumando momentos, detalles y recuerdos que solo son nuestros.",
+        reacciones: { corazon: 1, meEncanta: 0, risa: 0 }
       },
       init2: {
         seccion: "historia",
         fecha: "Agosto 2026",
         titulo: "D\u00eda de la Novia y Bellota",
-        texto: "Celebrando juntos con detalles hechos con cari\u00f1o y nuestra esencia de Butch y Bellota."
+        texto: "Celebrando juntos con detalles hechos con cari\u00f1o y nuestra esencia de Butch y Bellota.",
+        reacciones: { corazon: 1, meEncanta: 0, risa: 0 }
       },
       init3: {
         seccion: "galeria",
         fecha: "Nuestros momentos",
         titulo: "Fotos, videos y juguetes",
-        texto: "Aqu\u00ed iremos guardando nuestras salidas como las trajineras, videos juntos y las fotos de Bellota y nuestros mu\u00f1ecos."
+        texto: "Aqu\u00ed iremos guardando nuestras salidas, videos y las fotos de Bellota y nuestros mu\u00f1ecos.",
+        reacciones: { corazon: 0, meEncanta: 1, risa: 0 }
       },
       init4: {
         seccion: "poemas",
         fecha: "Para Ana Jelly",
         titulo: "Versos para ti",
-        texto: "Cada palabra escrita con el coraz\u00f3n para acortar la distancia y recordarte que tu sonrisa me enamora."
+        texto: "Cada palabra escrita con el coraz\u00f3n para acortar la distancia y recordarte que tu sonrisa me enamora.",
+        reacciones: { corazon: 1, meEncanta: 1, risa: 0 }
       },
       init5: {
         seccion: "dibujos",
         fecha: "Hecho a mano",
         titulo: "Tarjetas y trazos",
-        texto: "Dibujos hechos l\u00ednea por l\u00ednea y coloreados con dedicaci\u00f3n especial para ti."
+        texto: "Dibujos hechos l\u00ednea por l\u00ednea y coloreados con dedicaci\u00f3n especial para ti.",
+        reacciones: { corazon: 0, meEncanta: 1, risa: 0 }
       }
     };
+
+    function mostrarToast(mensaje) {
+      const toast = document.getElementById("toast");
+      toast.textContent = mensaje;
+      toast.classList.add("visible");
+      clearTimeout(mostrarToast._timer);
+      mostrarToast._timer = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 2600);
+    }
+
+    function cambiarFrase() {
+      indiceFrase = (indiceFrase + 1) % frasesAmor.length;
+      document.getElementById("frase-rotativa").textContent = frasesAmor[indiceFrase];
+      mostrarToast("Cambiando frase del d\u00eda \u2728");
+    }
+
+    function actualizarContadorTiempo() {
+      const inicio = new Date(2017, 6, 3); // 3 de julio de 2017
+      const ahora = new Date();
+      let anios = ahora.getFullYear() - inicio.getFullYear();
+      let meses = ahora.getMonth() - inicio.getMonth();
+      let dias = ahora.getDate() - inicio.getDate();
+
+      if (dias < 0) {
+        meses--;
+        const ultimoDiaMesAnterior = new Date(ahora.getFullYear(), ahora.getMonth(), 0).getDate();
+        dias += ultimoDiaMesAnterior;
+      }
+      if (meses < 0) {
+        anios--;
+        meses += 12;
+      }
+
+      const totalDias = Math.max(0, Math.floor((ahora - inicio) / (1000 * 60 * 60 * 24)));
+      document.getElementById("contador-historia").textContent =
+        `\u23f3 ${anios} a\u00f1os, ${meses} meses y ${dias} d\u00edas (${totalDias.toLocaleString()} d\u00edas)`;
+    }
+
+    function lanzarCorazones() {
+      const emojis = ["\ud83d\udc9c", "\ud83d\udc9a", "\u2728", "\ud83d\udc96"];
+      for (let i = 0; i < 18; i++) {
+        const span = document.createElement("span");
+        span.className = "lluvia-corazon";
+        span.textContent = emojis[i % emojis.length];
+        span.style.left = Math.random() * 94 + "vw";
+        span.style.animationDuration = (1.6 + Math.random() * 1.4) + "s";
+        span.style.animationDelay = (Math.random() * 0.45) + "s";
+        document.body.appendChild(span);
+        setTimeout(() => span.remove(), 3500);
+      }
+      mostrarToast("\u00a1Para Ana Jelly con todo el cari\u00f1o! \ud83d\udc9c");
+    }
 
     function verificarEntrada() {
       const input = document.getElementById("clave-entrada");
@@ -600,6 +861,12 @@
         document.body.classList.add("desbloqueado");
         error.textContent = "";
         input.value = "";
+        if (valor === CLAVE_SECRETA) {
+          document.body.classList.add("modo-editor");
+          mostrarToast("Modo Editor (1305) activado \ud83d\udd13");
+        } else {
+          lanzarCorazones();
+        }
       } else {
         error.textContent = "Contrase\u00f1a incorrecta. Intenta de nuevo.";
       }
@@ -609,7 +876,7 @@
       if (e.key === "Enter") verificarEntrada();
     });
 
-    function escucharNube() {
+    function escucharNube(forzarRender = false) {
       fetch(DB_URL)
         .then(res => res.json())
         .then(data => {
@@ -618,17 +885,49 @@
             fetch(DB_URL, {
               method: "PUT",
               body: JSON.stringify(recuerdosIniciales)
-            }).then(() => escucharNube());
+            }).then(() => escucharNube(true));
             return;
           }
-          renderizarRecuerdos(data);
+
+          const hashActual = JSON.stringify(data);
+          if (forzarRender || hashActual !== ultimoHashDatos) {
+            ultimoHashDatos = hashActual;
+            renderizarRecuerdos(data);
+          }
         })
         .catch(() => {
           document.getElementById("estado-sync").textContent = "\u26a0\ufe0f Revisa tu conexi\u00f3n a internet";
         });
     }
 
+    function extraerYouTubeId(url) {
+      if (!url) return null;
+      const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+      return match ? match[1] : null;
+    }
+
+    function extraerEnlaceVideo(texto, enlaceExplicito) {
+      const candidatos = [enlaceExplicito, texto].filter(Boolean).join(" ");
+      const urlMatch = candidatos.match(/https?:\/\/[^\s]+/i);
+      const url = urlMatch ? urlMatch[0].replace(/[),.;]+$/, "") : "";
+
+      if (!url) return null;
+
+      const ytId = extraerYouTubeId(url);
+      if (ytId) {
+        return { tipo: "youtube", id: ytId };
+      }
+
+      if (/\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url)) {
+        return { tipo: "mp4", src: url };
+      }
+
+      return null;
+    }
+
     function renderizarRecuerdos(data) {
+      const conteos = { historia: 0, galeria: 0, poemas: 0, dibujos: 0 };
+
       ["historia", "galeria", "poemas", "dibujos"].forEach(sec => {
         document.getElementById("lista-" + sec).innerHTML = "";
       });
@@ -639,24 +938,83 @@
         const contenedor = document.getElementById("lista-" + item.seccion);
         if (!contenedor) return;
 
+        conteos[item.seccion] = (conteos[item.seccion] || 0) + 1;
+
         const tarjeta = document.createElement("div");
         tarjeta.className = "tarjeta";
+        tarjeta.id = "tarjeta-" + id;
 
         let mediaHTML = "";
         if (item.imagenBase64) {
-          mediaHTML = `<img src="${item.imagenBase64}" alt="Recuerdo">`;
+          mediaHTML += `<img src="${item.imagenBase64}" alt="Recuerdo" loading="lazy">`;
+        }
+        if (item.videoBase64) {
+          mediaHTML += `<video src="${item.videoBase64}" controls playsinline preload="metadata"></video>`;
         }
 
+        const infoVideo = extraerEnlaceVideo(item.texto, item.videoUrl);
+        if (infoVideo) {
+          if (infoVideo.tipo === "youtube") {
+            mediaHTML += `
+              <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/${infoVideo.id}" title="Video de YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            `;
+          } else if (infoVideo.tipo === "mp4") {
+            mediaHTML += `<video src="${escaparTexto(infoVideo.src)}" controls playsinline preload="metadata"></video>`;
+          }
+        }
+
+        const rx = item.reacciones || { corazon: 0, meEncanta: 0, risa: 0 };
+
         tarjeta.innerHTML = `
-          <div class="fecha">${escaparTexto(item.fecha || "")}</div>
-          <h3>${escaparTexto(item.titulo || "")}</h3>
+          <div class="fecha">${escaparTexto(item.fecha || "Momento especial")}</div>
+          <h3>${escaparTexto(item.titulo || "Sin t\u00edtulo")}</h3>
           <p>${escaparTexto(item.texto || "")}</p>
           ${mediaHTML}
-          <button class="btn-borrar" onclick="borrarRecuerdo('${id}')">&#128465;&#65039; Borrar este recuerdo</button>
+          <div class="barra-reacciones">
+            <button class="btn-reaccion" onclick="reaccionar('${id}', 'corazon')">\ud83d\udc9c <span>${rx.corazon || 0}</span></button>
+            <button class="btn-reaccion" onclick="reaccionar('${id}', 'meEncanta')">\ud83d\ude0d <span>${rx.meEncanta || 0}</span></button>
+            <button class="btn-reaccion" onclick="reaccionar('${id}', 'risa')">\ud83d\ude02 <span>${rx.risa || 0}</span></button>
+          </div>
+          <button class="btn-borrar" onclick="borrarRecuerdo('${id}')">\ud83d\uddd1\ufe0f Borrar este recuerdo</button>
         `;
 
         contenedor.prepend(tarjeta);
       });
+
+      Object.keys(conteos).forEach(sec => {
+        const badge = document.getElementById("count-" + sec);
+        if (badge) badge.textContent = conteos[sec] + (conteos[sec] === 1 ? " recuerdo" : " recuerdos");
+      });
+    }
+
+    function reaccionar(id, tipo) {
+      const urlItem = `https://julio-ana-default-rtdb.firebaseio.com/recuerdos/${id}/reacciones.json`;
+      fetch(urlItem)
+        .then(res => res.json())
+        .then(actual => {
+          const base = actual || { corazon: 0, meEncanta: 0, risa: 0 };
+          base[tipo] = (base[tipo] || 0) + 1;
+          return fetch(urlItem, {
+            method: "PUT",
+            body: JSON.stringify(base)
+          }).then(() => escucharNube(true));
+        });
+      mostrarToast("\u00a1Reacci\u00f3n enviada! \ud83d\udc9c");
+    }
+
+    function recuerdoSorpresa() {
+      const tarjetas = Array.from(document.querySelectorAll(".seccion.activa .tarjeta"));
+      if (!tarjetas.length) {
+        mostrarToast("A\u00fan no hay recuerdos en esta secci\u00f3n");
+        return;
+      }
+      document.querySelectorAll(".tarjeta").forEach(t => t.classList.remove("destacada"));
+      const elegida = tarjetas[Math.floor(Math.random() * tarjetas.length)];
+      elegida.classList.add("destacada");
+      elegida.scrollIntoView({ behavior: "smooth", block: "center" });
+      mostrarToast("\u2728 \u00a1Aqu\u00ed tienes un recuerdo sorpresa!");
     }
 
     function escaparTexto(str) {
@@ -668,18 +1026,22 @@
     }
 
     function pedirClave() {
-      if (document.body.classList.contains("modo-editor")) return;
+      if (document.body.classList.contains("modo-editor")) {
+        mostrarToast("Ya est\u00e1s en Modo Editor");
+        return;
+      }
       const intento = prompt("Ingresa la contrase\u00f1a de editor:");
       if (intento === CLAVE_SECRETA) {
         document.body.classList.add("modo-editor");
-        alert("\u00a1Bienvenido Julio! Ya puedes agregar o borrar recuerdos en la nube.");
+        mostrarToast("\u00a1Bienvenido Julio! Modo editor activado.");
       } else if (intento !== null) {
-        alert("Contrase\u00f1a incorrecta.");
+        mostrarToast("Contrase\u00f1a incorrecta.");
       }
     }
 
     function salirEditor() {
       document.body.classList.remove("modo-editor");
+      mostrarToast("Modo editor cerrado");
     }
 
     function abrirModal() {
@@ -691,18 +1053,57 @@
       document.getElementById("input-fecha").value = "";
       document.getElementById("input-titulo").value = "";
       document.getElementById("input-texto").value = "";
+      document.getElementById("input-video-url").value = "";
       document.getElementById("input-archivo").value = "";
     }
 
-    function guardarRecuerdo() {
+    function comprimirImagen(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            const maxAncho = 820;
+            let ancho = img.width;
+            let alto = img.height;
+            if (ancho > maxAncho) {
+              alto = Math.round((alto * maxAncho) / ancho);
+              ancho = maxAncho;
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = ancho;
+            canvas.height = alto;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, ancho, alto);
+            resolve(canvas.toDataURL("image/jpeg", 0.76));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function leerArchivoComoDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function guardarRecuerdo() {
       const seccion = document.getElementById("input-seccion").value;
       const fecha = document.getElementById("input-fecha").value.trim();
       const titulo = document.getElementById("input-titulo").value.trim();
       const texto = document.getElementById("input-texto").value.trim();
+      const videoUrl = document.getElementById("input-video-url").value.trim();
       const archivo = document.getElementById("input-archivo").files[0];
 
-      if (!titulo && !texto && !archivo) {
-        alert("Escribe un t\u00edtulo, un texto o elige una foto.");
+      if (!titulo && !texto && !videoUrl && !archivo) {
+        mostrarToast("Escribe un t\u00edtulo, texto, enlace o elige un archivo.");
         return;
       }
 
@@ -710,40 +1111,49 @@
       btnGuardar.disabled = true;
       btnGuardar.textContent = "Subiendo...";
 
-      const enviarANube = (imagenBase64) => {
+      try {
+        let imagenBase64 = null;
+        let videoBase64 = null;
+
+        if (archivo) {
+          if (archivo.type.startsWith("image/")) {
+            imagenBase64 = await comprimirImagen(archivo);
+          } else if (archivo.type.startsWith("video/")) {
+            if (archivo.size > 4.5 * 1024 * 1024) {
+              btnGuardar.disabled = false;
+              btnGuardar.textContent = "Guardar en nube";
+              mostrarToast("El video es muy pesado para subir directo. Pega un link de YouTube o .mp4.");
+              return;
+            }
+            videoBase64 = await leerArchivoComoDataURL(archivo);
+          }
+        }
+
         const nuevo = {
           seccion,
           fecha,
           titulo,
           texto,
-          imagenBase64: imagenBase64 || null
+          videoUrl: videoUrl || null,
+          imagenBase64,
+          videoBase64,
+          reacciones: { corazon: 1, meEncanta: 0, risa: 0 }
         };
 
-        fetch(DB_URL, {
+        await fetch(DB_URL, {
           method: "POST",
           body: JSON.stringify(nuevo)
-        })
-        .then(() => {
-          btnGuardar.disabled = false;
-          btnGuardar.textContent = "Guardar en nube";
-          cerrarModal();
-          escucharNube();
-        })
-        .catch(() => {
-          btnGuardar.disabled = false;
-          btnGuardar.textContent = "Guardar en nube";
-          alert("Hubo un problema al subir. Intenta de nuevo.");
         });
-      };
 
-      if (archivo) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          enviarANube(e.target.result);
-        };
-        reader.readAsDataURL(archivo);
-      } else {
-        enviarANube(null);
+        btnGuardar.disabled = false;
+        btnGuardar.textContent = "Guardar en nube";
+        cerrarModal();
+        mostrarToast("\u00a1Recuerdo guardado en la nube! \u2728");
+        escucharNube(true);
+      } catch (err) {
+        btnGuardar.disabled = false;
+        btnGuardar.textContent = "Guardar en nube";
+        mostrarToast("Hubo un problema al subir. Intenta de nuevo.");
       }
     }
 
@@ -751,7 +1161,10 @@
       if (!confirm("\u00bfSeguro que quieres borrar este recuerdo de la nube?")) return;
       const urlItem = `https://julio-ana-default-rtdb.firebaseio.com/recuerdos/${id}.json`;
       fetch(urlItem, { method: "DELETE" })
-        .then(() => escucharNube());
+        .then(() => {
+          mostrarToast("Recuerdo eliminado");
+          escucharNube(true);
+        });
     }
 
     function cambiarSeccion(idSeccion, botonPresionado) {
@@ -762,8 +1175,9 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    escucharNube();
-    setInterval(escucharNube, 10000);
+    actualizarContadorTiempo();
+    escucharNube(true);
+    setInterval(() => escucharNube(false), 12000);
   </script>
 
 </body>
